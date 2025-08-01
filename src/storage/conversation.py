@@ -89,6 +89,18 @@ class ConversationStorage:
             if conversation:
                 conversation.last_accessed = datetime.utcnow()
 
+    def update_conversation_title(self, conversation_id: str, title: str) -> None:
+        """Update the title of a conversation."""
+        with get_database_session() as session:
+            conversation = (
+                session.query(Conversation)
+                .filter(Conversation.id == conversation_id)
+                .first()
+            )
+
+            if conversation:
+                conversation.title = title[:255] if len(title) > 255 else title
+
     def add_message(self, message_data: MessageCreate) -> MessageResponse:
         """Add a message to a conversation."""
         with get_database_session() as session:

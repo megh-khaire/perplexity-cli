@@ -159,6 +159,14 @@ def run_chat_loop(conversation):
                 )
             )
 
+            # If this is the first user message, update conversation title if it's still default
+            messages = storage.get_conversation_messages(conversation.id)
+            if len(messages) == 1:
+                current_conversation = storage.get_conversation(conversation.id)
+                if current_conversation and current_conversation.title.startswith("Conversation "):
+                    title = user_input[:255] if len(user_input) > 255 else user_input
+                    storage.update_conversation_title(conversation.id, title)
+
             # Get conversation history for context (including the message we just added)
             history = storage.get_conversation_history(conversation.id)
 
