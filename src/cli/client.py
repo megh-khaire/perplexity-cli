@@ -34,34 +34,15 @@ class AgentClient:
         Returns:
             AI response based on internet search and conversation context
         """
-        # Get the latest user message for search
-        user_messages = [msg for msg in messages if msg.get("role") == "user"]
-        if user_messages and self.search_agent:
-            # Use the latest user message as search query
-            latest_query = user_messages[-1].get("content", "")
-            if latest_query.strip():
-                # Perform internet search for the user's question
-                return self.search_agent.search_and_answer(latest_query, stream=stream)
+        # Use search agent if available
+        if self.search_agent and messages:
+            # Get the latest user message for search query
+            user_messages = [msg for msg in messages if msg.get("role") == "user"]
+            if user_messages:
+                latest_query = user_messages[-1].get("content", "")
+                if latest_query.strip():
+                    # Pass full conversation history to search agent
+                    return self.search_agent.search_and_answer_with_context(messages, latest_query, stream=stream)
 
         # Fallback to regular conversation if no search agent or no user message
         return generate_conversation_response(messages, stream=stream)
-
-    def search(
-        self, query: str, stream: bool = False
-    ) -> Union[str, Generator[str, None, None]]:
-        """Search the internet and provide a comprehensive answer.
-
-        Args:
-            query: Search query
-            stream: Whether to stream the response
-
-        Returns:
-            AI response based on internet search results
-        """
-        if not self.search_agent:
-            error_msg = "Search functionality requires SERPAPI_KEY to be set. Please set your SerpAPI key and restart."
-            if stream:
-                return (chunk for chunk in [error_msg])
-            return error_msg
-
-        return self.search_agent.search_and_answer(query, stream=stream)

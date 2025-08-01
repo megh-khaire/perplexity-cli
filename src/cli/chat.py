@@ -167,11 +167,13 @@ def run_chat_loop(conversation):
 
             try:
                 # Show search/thinking loader while waiting for first token
-                status_msg = "[cyan]Searching the internet...[/cyan]" if agent_client.search_agent else "[cyan]Thinking...[/cyan]"
+                status_msg = (
+                    "[cyan]Searching the internet...[/cyan]"
+                    if agent_client.search_agent
+                    else "[cyan]Thinking...[/cyan]"
+                )
                 with console.status(status_msg):
-                    # Use chat method with conversation history and streaming enabled
                     response_stream = agent_client.chat(history, stream=True)
-                    # Debug: Check if we got a generator
                     if response_stream is None:
                         raise Exception("No response stream received from agent")
 
