@@ -1,0 +1,80 @@
+[project]
+name = "perplexity-cli"
+version = "0.1.0"
+description = "A CLI replica of Perplexity AI"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Megh Khaire", email = "meghkhaire@gmail.com" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Environment :: Console",
+    "Topic :: Software Development :: Version Control :: Git",
+]
+dependencies = [
+    # Agent dependencies
+    "openai>=1.95.1",
+    "pyyaml>=6.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.1.1",
+
+    # CLI dependencies
+    "typer>=0.9.0",
+    "gitpython>=3.1.40",
+    "rich>=13.0.0",
+
+    # Server dependencies
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "sqlalchemy>=2.0.0",
+    "sqlalchemy-utils>=0.41.0",
+    "psycopg2-binary>=2.9.0",
+    "alembic>=1.12.0",
+    "python-jose[cryptography]>=3.3.0",
+    "bcrypt>=4.0.0",
+    "slowapi>=0.1.9",
+    "python-multipart>=0.0.6",
+    "email-validator>=2.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.12.0",
+    "pytest-asyncio>=0.23.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+perplexity-cli = "perplexity_cli.main:app"
+
+[project.urls]
+Homepage = "https://github.com/megh-khaire/perplexity-cli"
+Repository = "https://github.com/megh-khaire/perplexity-cli"
+Issues = "https://github.com/megh-khaire/perplexity-cli/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = ["-v"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
