@@ -28,6 +28,9 @@ dependencies = [
     "gitpython>=3.1.40",
     "rich>=13.0.0",
 
+    # Search dependencies
+    "google-search-results>=2.4.2",  # SerpAPI client
+
     # Server dependencies
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
