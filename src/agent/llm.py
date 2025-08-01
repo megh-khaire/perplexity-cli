@@ -92,7 +92,7 @@ def _stream_llm_response_with_tools(
     # If there are tool calls, process them
     if response.choices[0].message.tool_calls:
         # Yield the tool call indicator
-        yield "[Searching the internet for current information...]\n\n"
+        yield "Searching the internet...\n\n"
 
         # Execute tool calls
         tool_results = tool_executor.execute_tool_calls(

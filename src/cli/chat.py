@@ -167,11 +167,7 @@ def run_chat_loop(conversation):
 
             try:
                 # Show search/thinking loader while waiting for first token
-                status_msg = (
-                    "[cyan]Searching the internet...[/cyan]"
-                    if agent_client.search_agent
-                    else "[cyan]Thinking...[/cyan]"
-                )
+                status_msg = "[cyan]Thinking...[/cyan]"
                 with console.status(status_msg):
                     response_stream = agent_client.chat(history, stream=True)
                     if response_stream is None:
