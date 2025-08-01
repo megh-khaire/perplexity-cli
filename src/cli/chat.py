@@ -166,8 +166,9 @@ def run_chat_loop(conversation):
             console.print("\n[cyan]Assistant:[/cyan] ", end="")
 
             try:
-                # Show thinking loader while waiting for first token
-                with console.status("[cyan]Thinking...[/cyan]"):
+                # Show search/thinking loader while waiting for first token
+                status_msg = "[cyan]Searching the internet...[/cyan]" if agent_client.search_agent else "[cyan]Thinking...[/cyan]"
+                with console.status(status_msg):
                     # Use chat method with conversation history and streaming enabled
                     response_stream = agent_client.chat(history, stream=True)
                     # Debug: Check if we got a generator

@@ -32,10 +32,19 @@ pip install -e .
    export OPENAI_API_KEY='your-api-key-here'
    ```
 
-   Or add it to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.):
+2. **Set up your SerpAPI key for internet search:**
+
+   ```bash
+   export SERPAPI_KEY='your-serpapi-key-here'
+   ```
+
+   Get your free SerpAPI key at: <https://serpapi.com/>
+
+   Or add both keys to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.):
 
    ```bash
    echo 'export OPENAI_API_KEY="your-api-key-here"' >> ~/.bashrc
+   echo 'export SERPAPI_KEY="your-serpapi-key-here"' >> ~/.bashrc
    source ~/.bashrc
    ```
 
@@ -158,27 +167,31 @@ export PERPLEXITY_CLI_MAX_HISTORY=100
 
 ## 💡 Features
 
+- **Internet-Powered Chat**: Every message searches the web for current information
+- **Intelligent Query Analysis**: Automatically breaks down complex questions
+- **Multi-Source Research**: Searches multiple queries to gather comprehensive info
 - **Persistent Memory**: All conversations are saved and can be resumed
 - **Context Awareness**: AI remembers the full conversation history
 - **Interactive Selection**: Easy-to-use conversation picker
 - **Rich CLI**: Beautiful formatted output with colors and panels
 - **Export/Import**: JSON export for conversation backup
 - **Search**: Full-text search through conversation history
+- **Real-time Streaming**: Responses stream in real-time like ChatGPT
 - **Cross-platform**: Works on macOS, Linux, and Windows
 
 ## 🔍 Examples
 
-### Research Session
+### Internet-Powered Research Session
 
 ```bash
 # Start a research conversation
 perplexity-cli chat start --title "Climate Change Research"
 
 # In chat:
-# You: "What are the main causes of climate change?"
-# Assistant: [detailed response]
-# You: "Can you elaborate on greenhouse gases?"
-# Assistant: [contextual response referring to previous discussion]
+# You: "What are the latest developments in climate change for 2024?"
+# Assistant: [Searches the internet and provides current information with sources]
+# You: "How do these compare to previous years?"
+# Assistant: [Searches for historical data and provides contextual comparison]
 ```
 
 ### Resume Previous Work
